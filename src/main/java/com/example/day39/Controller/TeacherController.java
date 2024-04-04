@@ -54,4 +54,7 @@ public class TeacherController {
         logger.info("delete teacher");
         Teacher teacher = teacherService.getByID(id);
         return ResponseEntity.ok(teacher);
-    }}
+    }
+
+
+}
