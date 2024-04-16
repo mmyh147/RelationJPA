@@ -1,8 +1,10 @@
 package com.example.day39.Model;
 
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,23 +17,23 @@ import java.util.Set;
 @AllArgsConstructor
 @Entity
 @NoArgsConstructor
-public class Course {
+public class Student {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @NotEmpty(message = "course name must not be empty")
+    @NotEmpty(message = "name must not be empty")
     @Column(columnDefinition = "varchar(20) not null")
     private String name;
+    @NotNull(message = "age must not be empty")
+    @Column(columnDefinition = "int not null")
+    private Integer age;
+    @NotEmpty(message = "major must not be empty")
+    @Column(columnDefinition = "varchar(20) not null")
+    private String major;
 
 
-    @ManyToOne
-    @JoinColumn(name = "teacher_id", referencedColumnName = "id")
+    @ManyToMany
     @JsonIgnore
-    private Teacher teacher;
-
-
-    @ManyToMany(mappedBy = "courses")
-    @JsonIgnore
-    private Set<Student> students;
+    private Set<Course> courses;
 }
